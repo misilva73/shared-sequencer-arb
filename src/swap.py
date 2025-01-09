@@ -29,7 +29,7 @@ def compute_arb_trade_sizes(
     x_B, y_B = rollup_B.get_arb_pool_reserves()
     fee = rollup_A.get_arb_pool_fee()  # should be the same in both rollups!
     # Compute optimal arbitrage trade sizes -> check paper for full derivation!
-    delta_y_B = (math.sqrt(x_A * y_A * x_B * y_B) - x_A * y_B) / (
+    delta_y_B = ((1 - fee) * math.sqrt(x_A * y_A * x_B * y_B) - x_A * y_B) / (
         (1 - fee) * x_A + ((1 - fee) ** 2) * x_B
     )
     delta_x_B = (x_B * (1 - fee) * delta_y_B) / (y_B + (1 - fee) * delta_y_B)
